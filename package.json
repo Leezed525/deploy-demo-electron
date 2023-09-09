@@ -17,7 +17,8 @@
     "core-js": "^3.8.3",
     "element-ui": "^2.4.5",
     "sass-loader": "^13.3.2",
-    "vue": "^2.6.14"
+    "vue": "^2.6.14",
+    "vue-router": "3"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",
@@ -46,7 +47,17 @@
     "parserOptions": {
       "parser": "@babel/eslint-parser"
     },
-    "rules": {}
+    "rules": {
+      "vue/multi-word-component-names": [
+        "error",
+        {
+          "ignores": [
+            "index",
+            "main"
+          ]
+        }
+      ]
+    }
   },
   "browserslist": [
     "> 1%",
