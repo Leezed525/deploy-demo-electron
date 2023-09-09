@@ -14,6 +14,7 @@ export default {
     // HelloWorld
   },
   created() {
+    // this.$router.push("/login")
   },
   methods: {
     sendHelloWorld() {

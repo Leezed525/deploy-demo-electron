@@ -2,8 +2,8 @@ import Vue from 'vue';
 import Router from 'vue-router';
 
 
-import login from "@/views/system/login/index.vue";
-import index from "@/views/system/index/index.vue";
+// import login from "@/views/system/login/index.vue";
+// import index from "@/views/system/index/index.vue";
 
 Vue.use(Router);
 
@@ -16,12 +16,12 @@ export const constantRoutes = [
     },
     {
         path: '/index',
-        // component: (resolve) => require(['@/views/system/index/index.vue', resolve]),
-        component: index,
+        component: () => import('@/views/system/index/index.vue'),
+        // component: index,
     },
     {
         path: '/login',
-        component: login,
+        component: () => import("@/views/system/login/index.vue"),
         hidden: true
     },
 ];
