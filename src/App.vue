@@ -7,19 +7,30 @@
         <code v-text="'<el-button>'"></code>
         below
       </p>
-      <el-button>el-button</el-button>
+      <el-button @click="sendHelloWorld">el-button</el-button>
     </div>
     <HelloWorld msg="Welcome to Your Vue.js App"/>
   </div>
 </template>
 
 <script>
+import {helloWorldReq} from '@/api/demo/tmp'
 import HelloWorld from './components/HelloWorld.vue'
 
 export default {
   name: 'app',
   components: {
     HelloWorld
+  },
+  methods: {
+    sendHelloWorld() {
+      console.log(1);
+      helloWorldReq().then(res => {
+        console.log(res);
+      }).catch(err => {
+        console.log(err);
+      })
+    },
   }
 }
 </script>
