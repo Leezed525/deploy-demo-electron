@@ -4,6 +4,8 @@
   </div>
 </template>
 <script>
+// import {listAllUser} from "@/db/system/user";
+
 export default {
   name: 'index',
   data() {
