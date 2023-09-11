@@ -22,7 +22,8 @@
     "sass-loader": "^13.3.2",
     "sqlite3": "^5.1.6",
     "vue": "^2.6.14",
-    "vue-router": "3"
+    "vue-router": "3",
+    "vuex": "3"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",
