@@ -12,9 +12,21 @@ export function listAllUser() {
     });
 }
 
+//检查用户名密码是否正确
+export function checkUser(data) {
+    return new Promise((resolve, reject) => {
+        db.get(`select * from user where username='${data.username}' and password='${data.password}'`, (err, row) => {
+            if (err) {
+                reject(err);
+            }
+            resolve(row);
+        });
+    });
+}
+
 
 // 新增
-function insertUser(data) {
+export function insertUser(data) {
     return new Promise((resolve, reject) => {
         db.run(
             `INSERT INTO user(username, nickname, password) VALUES('${data.name}', '${data.email}', '${data.phone}')`,

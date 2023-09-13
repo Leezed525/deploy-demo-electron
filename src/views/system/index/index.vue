@@ -13,6 +13,9 @@ export default {
   },
   created() {
     console.log("index loading")
+    if (this.$store.getters.isLogin === false) {
+      this.$router.push({path: '/login'})
+    }
   }
 }
 
