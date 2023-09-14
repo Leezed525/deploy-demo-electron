@@ -68,9 +68,9 @@ export default {
 
   methods: {
     login() {
-      //登陆成功跳转到首页
       let data = this.loginForm;
       this.$store.dispatch("login", data).then(() => {
+        //登陆成功跳转到首页
         this.$router.push({path: "/index"});
       }).catch((err) => {
         this.$modal.msgError(err);
