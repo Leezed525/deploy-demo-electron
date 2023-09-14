@@ -26,7 +26,7 @@
                 <el-col :span="8" :offset="8">
                   <el-image fit="scale-down" :src="predictForm.file == null?'':predictForm.fileUrl">
                     <div slot="error" class="image-slot">
-                      <i class="el-icon-picture-outline"></i>
+                      <i class="el-icon-picture-outline">上传图片后预览</i>
                     </div>
                   </el-image>
                 </el-col>
