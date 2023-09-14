@@ -44,9 +44,18 @@ export default {
       loginForm: {
         username: "",
         password: "",
-
       }
     }
+  },
+  watch: {
+    "$route.getters.isLogin": {
+      handler(val, oldVal) {
+        console.log("in login watch");
+        console.log(val);
+        console.log(oldVal);
+      },
+      immediate: true,
+    },
   },
   created() {
     if (this.$store.getters.isLogin) {
@@ -61,8 +70,11 @@ export default {
     login() {
       //登陆成功跳转到首页
       let data = this.loginForm;
-      this.$store.dispatch("login", data);
-      this.$router.push({path: "/index"});
+      this.$store.dispatch("login", data).then(() => {
+        this.$router.push({path: "/index"});
+      }).catch((err) => {
+        this.$modal.msgError(err);
+      });
     },
     forget() {
       this.$modal.msgError("请联系管理员重置或使用root账号重置");
@@ -70,6 +82,7 @@ export default {
   },
 
 }
+
 
 </script>
 

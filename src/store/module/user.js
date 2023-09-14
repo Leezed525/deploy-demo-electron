@@ -30,17 +30,19 @@ const user = {
     },
     actions: {
         login({commit}, loginForm) {
-            checkUser(loginForm).then((data) => {
-                console.log(data);
-                if (isNotEmptyObject(data)) {
-                    Message.success('登录成功');
-                    commit('LOGIN', data);
-                } else {
-                    Message.error('用户名或密码错误');
-                }
-            }).catch((err) => {
-                console.log(err);
-                Message.error('出错');
+            return new Promise((resolve, reject) => {
+                checkUser(loginForm).then((data) => {
+                    console.log(data);
+                    if (isNotEmptyObject(data)) {
+                        Message.success('登录成功');
+                        commit('LOGIN', data);
+                        resolve();
+                    } else {
+                        reject('用户名或密码错误');
+                    }
+                }).catch((err) => {
+                    reject(err);
+                });
             });
         },
         Logout({commit}) {
