@@ -14,7 +14,15 @@
     <el-card>
       <el-tabs tab-position="left">
         <el-tab-pane label="预测">
-          <predict-frame/>
+          <el-tabs>
+            <el-tab-pane label="单张图片预测">
+              <predict-single/>
+            </el-tab-pane>
+            <el-tab-pane label="多张图片预测">
+              <predict-multi/>
+            </el-tab-pane>
+          </el-tabs>
+
         </el-tab-pane>
         <el-tab-pane label="配置管理">配置管理</el-tab-pane>
         <el-tab-pane label="角色管理">角色管理</el-tab-pane>
@@ -26,12 +34,15 @@
   </div>
 </template>predictSingle
 <script>
-import predictFrame from "./component/predictFrame.vue";
+import predictSingle from "./component/predictSingle.vue";
+import predictMulti from "./component/predictMulti.vue";
+
 
 export default {
   name: 'index',
   components: {
-    predictFrame
+    predictSingle,
+    predictMulti
   },
   computed: {
     nickname() {

@@ -40,7 +40,7 @@
 import {predictSingleImage} from '@/api/demo/predict';
 
 export default {
-  name: 'index',
+  name: 'predictSingle',
   data() {
     return {
       predictForm: {
@@ -87,7 +87,6 @@ export default {
       }).catch(err => {
         this.$modal.msgError("预测失败" + err);
       })
-
     },
   }
 };

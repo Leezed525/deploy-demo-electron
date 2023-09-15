@@ -14,8 +14,8 @@ const service = axios.create({
 // request拦截器
 service.interceptors.request.use(config => {
     // 避免跨域
-    config.headers["Content-Type"] = "application/octet-stream";
-    config.headers['Access-Control-Allow-Origin'] = "*";
+    // config.headers["Content-Type"] = "application/json";
+    // config.headers['Access-Control-Allow-Origin'] = "*";
     // get请求映射params参数
     if (config.method === 'get' && config.params) {
         let url = config.url + '?';
