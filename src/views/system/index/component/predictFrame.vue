@@ -85,7 +85,7 @@ export default {
         }
         this.$modal.msgSuccess("预测成功,预测结果为：" + maxIndex);
       }).catch(err => {
-        this.$modal.msgError("预测失败");
+        this.$modal.msgError("预测失败" + err);
       })
 
     },
