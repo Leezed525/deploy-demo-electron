@@ -1,10 +1,10 @@
 const getters = {
-    userInfo: () => {
+    userInfo: (state) => {
         return {
-            id: state => state.user.id,
-            nickname: state => state.user.nickname,
-            role: state => state.user.role,
-            username: state => state.user.username,
+            id: state.user.id,
+            nickname: state.user.nickname,
+            role: state.user.role,
+            username: state.user.username,
         }
     },
     isLogin: state => state.user.isLogin,
