@@ -97,6 +97,7 @@ export function updateUser(data) {
     });
 }
 
+//修改用户密码
 export function changeUserPassword(data) {
     let sql = `UPDATE user SET password='${data.password}' WHERE id= ${data.id}`
     console.log(sql)
@@ -109,5 +110,18 @@ export function changeUserPassword(data) {
                 }
             }
         );
+    });
+}
+
+//重置用户密码
+export function resetUserPassword(id) {
+    return new Promise((resolve, reject) => {
+        db.run(`UPDATE user SET password='123456' WHERE id= ${id}`, function (err) {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(this.changes);
+            }
+        });
     });
 }

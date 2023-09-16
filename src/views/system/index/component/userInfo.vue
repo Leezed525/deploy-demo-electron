@@ -16,10 +16,11 @@
           </el-col>
           <el-col :span="6">
             <el-form-item label="权限:" prop="role">
-                <el-select v-model="searchForm.role">
-                  <el-option v-for="item in roleDict.filter(role => role.id >= currentRole)" :key="item.id" :label="item.name"
-                             :value="item.id"/>
-                </el-select>
+              <el-select v-model="searchForm.role">
+                <el-option v-for="item in roleDict.filter(role => role.id >= currentRole)" :key="item.id"
+                           :label="item.name"
+                           :value="item.id"/>
+              </el-select>
             </el-form-item>
           </el-col>
           <el-col :span="6">
@@ -55,7 +56,11 @@
         <el-table-column label="操作">
           <template v-slot="scope">
             <el-button type="primary" size="mini" @click="handleUpdate(scope.row.id)">编辑</el-button>
-            <el-button type="danger" size="mini" @click="handleDelete(scope.row.id)">删除</el-button>
+            <el-button type="danger" size="mini" @click="handleDelete(scope.row.id)" v-if="scope.row.id !== 1">删除
+            </el-button>
+            <el-button type="warning" size="mini" @click="handleResetPassword(scope.row)" v-if="scope.row.id !== 1">
+              重置密码
+            </el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -96,11 +101,14 @@ import {
   getUserById,
   getUserByUsername,
   insertUser,
-  updateUser
+  updateUser,
+  resetUserPassword
 } from "@/db/system/userDB";
 
-import {isEmptyObject,
-isNotEmptyObject} from "@/utils/ObjectUtils";
+import {
+  isEmptyObject,
+  isNotEmptyObject
+} from "@/utils/ObjectUtils";
 
 export default {
   name: 'userInfo',
@@ -249,6 +257,22 @@ export default {
           });
         }
       })
+    },
+    //处理重置密码
+    handleResetPassword(row) {
+      this.$confirm("确定重置 " + row.nickname + " 的密码为123456吗？", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
+      }).then(() => {
+        resetUserPassword(row.id).then(() => {
+          this.$modal.msgSuccess("重置密码成功");
+        }).catch(err => {
+          this.$modal.msgError("重置密码失败 " + err);
+        });
+      }).catch(() => {
+        console.log("取消重置密码");
+      });
     }
   }
 }
