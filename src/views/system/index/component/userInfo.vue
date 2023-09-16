@@ -190,6 +190,7 @@ export default {
     //获取数据
     getList() {
       let query = this.searchForm;
+      query.currentRole = this.currentRole;
       listAllUser(query).then(res => {
         this.list = res;
       });

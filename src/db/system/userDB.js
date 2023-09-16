@@ -13,6 +13,9 @@ export function listAllUser(query) {
     if (isNotEmptyObject(query.role)) {
         sql += ` and role = ${query.role}`
     }
+    if (isNotEmptyObject(query.currentRole)) {
+        sql += ` and role >= ${query.currentRole}`
+    }
     return new Promise((resolve, reject) => {
         db.all(sql, (err, rows) => {
             if (err) {
