@@ -20,6 +20,7 @@ const user = {
             state.username = data.username
             state.nickname = data.nickname
             state.role = data.role
+            state.id = data.id
         },
         LOGOUT: (state) => {
             state.isLogin = false

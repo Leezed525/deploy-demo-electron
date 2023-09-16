@@ -2,32 +2,34 @@
   <div>
     <!--搜索表单部分-->
     <el-card style="margin: 5px">
-      <el-form :ref="searchForm" :model="searchForm" label-width="50px">
+      <el-form ref="searchForm" :model="searchForm" label-width="50px">
         <el-row>
           <el-col :span="6">
-            <el-form-item label="账号:">
+            <el-form-item label="账号:" prop="username">
               <el-input v-model="searchForm.username"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="6">
-            <el-form-item label="昵称:">
+            <el-form-item label="昵称:" prop="nickname">
               <el-input v-model="searchForm.nickname"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="6">
-            <el-form-item label="权限:">
+            <el-form-item label="权限:" prop="role">
               <el-input v-model="searchForm.role"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="6">
             <el-form-item>
               <el-button type="primary" @click="getList">搜索</el-button>
-              <el-button type="info">重置</el-button>
+              <el-button type="info" @click="this.$refs.searchForm.resetField()">重置</el-button>
             </el-form-item>
           </el-col>
         </el-row>
       </el-form>
     </el-card>
+
+    <!--新增按钮部分-->
     <el-card style="margin: 5px">
       <el-row :gutter="10" class="mb8">
         <el-col :span="1.5">
@@ -170,7 +172,6 @@ export default {
     this.updateInsertOpen = false
   },
   created() {
-    console.log("userInfo loading");
     this.getList();
   },
   methods: {
@@ -179,12 +180,11 @@ export default {
       let query = this.searchForm;
       listAllUser(query).then(res => {
         this.list = res;
-        console.log(this.list);
       });
     },
     clearUpdateInsertForm() {
       this.updateInsertForm = {
-        id: undefined,
+        userId: undefined,
         username: undefined,
         nickname: undefined,
         role: undefined,
@@ -201,7 +201,6 @@ export default {
     handleUpdate(id) {
       this.clearUpdateInsertForm();
       getUserById(id).then(res => {
-        console.log(res);
         this.updateInsertOpen = true;
         this.title = "修改用户信息";
         this.updateInsertForm = res;
@@ -213,15 +212,13 @@ export default {
     },
     //处理提交
     handleSubmit() {
-      console.log(this.updateInsertForm);
       this.$refs.updateInsertForm.validate(valid => {
         if (!valid) {
           return;
         }
         if (this.updateInsertForm.id === undefined) {
           //新增
-          insertUser(this.updateInsertForm).then(res => {
-            console.log(res);
+          insertUser(this.updateInsertForm).then(() => {
             this.updateInsertOpen = false;
             this.$modal.msgSuccess("添加用户成功");
             this.getList();
@@ -230,8 +227,7 @@ export default {
           });
         } else {
           //修改
-          updateUser(this.updateInsertForm).then(res => {
-            console.log(res);
+          updateUser(this.updateInsertForm).then(() => {
             this.updateInsertOpen = false;
             this.$modal.msgSuccess("修改用户成功");
             this.getList();
