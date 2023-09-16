@@ -5,7 +5,6 @@
         <el-row>
           <el-col :span="8" :offset="16">
             <div>您好，尊贵的{{ nickname }},您的权限为{{ roleName }}</div>
-
             <!--            <div>现在是{{ currentTime }}</div>-->
           </el-col>
         </el-row>
@@ -80,7 +79,7 @@ export default {
     }
   },
   methods: {}
-}
+};
 
 </script>
 
