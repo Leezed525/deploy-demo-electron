@@ -5,7 +5,8 @@
         <el-row>
           <el-col :span="8" :offset="16">
             <div>您好，尊贵的{{ nickname }},您的权限为{{ roleName }}</div>
-            现在是{{ new Date().toLocaleString() }}
+
+            <!--            <div>现在是{{ currentTime }}</div>-->
           </el-col>
         </el-row>
       </el-header>
@@ -22,10 +23,11 @@
               <predict-multi/>
             </el-tab-pane>
           </el-tabs>
-
         </el-tab-pane>
-        <el-tab-pane label="配置管理">配置管理</el-tab-pane>
-        <el-tab-pane label="角色管理">角色管理</el-tab-pane>
+        <!--        <el-tab-pane label="配置管理">配置管理</el-tab-pane>-->
+        <el-tab-pane label="角色管理">
+          <userInfo></userInfo>
+        </el-tab-pane>
         <el-tab-pane label="定时任务补偿">定时任务补偿</el-tab-pane>
       </el-tabs>
     </el-card>
@@ -37,14 +39,20 @@
 import predictSingle from "./component/predictSingle.vue";
 import predictMulti from "./component/predictMulti.vue";
 
+import userInfo from "./component/userInfo.vue";
+
 
 export default {
   name: 'index',
   components: {
     predictSingle,
-    predictMulti
+    predictMulti,
+    userInfo
   },
   computed: {
+    currentTime() {
+      return new Date().toLocaleString();
+    },
     nickname() {
       return this.$store.getters.userInfo.nickname
     },

@@ -1,9 +1,20 @@
 const {db} = require('../database');
+import {isNotEmptyObject} from "@/utils/ObjectUtils";
 
 // 查询
-export function listAllUser() {
+export function listAllUser(query) {
+    let sql = `select * from user where 1 = 1`
+    if (isNotEmptyObject(query.username)) {
+        sql += ` and username like '%${query.username}%'`;
+    }
+    if (isNotEmptyObject(query.nickname)) {
+        sql += ` and nickname like '%${query.nickname}%'`
+    }
+    if (isNotEmptyObject(query.role)) {
+        sql += ` and role = ${query.role}`
+    }
     return new Promise((resolve, reject) => {
-        db.all('select * from user', (err, rows) => {
+        db.all(sql, (err, rows) => {
             if (err) {
                 reject(err);
             }
