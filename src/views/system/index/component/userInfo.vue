@@ -16,13 +16,16 @@
           </el-col>
           <el-col :span="6">
             <el-form-item label="权限:" prop="role">
-              <el-input v-model="searchForm.role"></el-input>
+                <el-select v-model="searchForm.role">
+                  <el-option v-for="item in roleDict.filter(role => role.id >= currentRole)" :key="item.id" :label="item.name"
+                             :value="item.id"/>
+                </el-select>
             </el-form-item>
           </el-col>
           <el-col :span="6">
             <el-form-item>
               <el-button type="primary" @click="getList">搜索</el-button>
-              <el-button type="info" @click="this.$refs.searchForm.resetField()">重置</el-button>
+              <el-button type="info" @click="clearQuery">重置</el-button>
             </el-form-item>
           </el-col>
         </el-row>
@@ -175,6 +178,15 @@ export default {
     this.getList();
   },
   methods: {
+    //清空搜索表单
+    clearQuery() {
+      this.searchForm = {
+        username: undefined,
+        nickname: undefined,
+        role: undefined,
+      };
+      this.getList();
+    },
     //获取数据
     getList() {
       let query = this.searchForm;
