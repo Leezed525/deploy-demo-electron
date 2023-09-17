@@ -4,7 +4,7 @@ import {app, protocol, BrowserWindow} from 'electron'
 import {createProtocol} from 'vue-cli-plugin-electron-builder/lib'
 import installExtension, {VUEJS_DEVTOOLS} from 'electron-devtools-installer'
 
-const {createDataTable} = require("./db/database")// 创建数据库
+import {initDatabase} from './db/database'
 const isDevelopment = process.env.NODE_ENV !== 'production'
 
 // Scheme must be registered before the app is ready
@@ -28,7 +28,7 @@ async function createWindow() {
             }
         }
     })
-    console.log(process.env.WEBPACK_DEV_SERVER_URL);
+    console.log('后置代码');
     if (process.env.WEBPACK_DEV_SERVER_URL) {
         // Load the url of the dev server if in development mode
         await win.loadURL(process.env.WEBPACK_DEV_SERVER_URL)
@@ -38,7 +38,7 @@ async function createWindow() {
         // Load the index.html when not in development
         win.loadURL('app://./index.html')
     }
-    createDataTable();
+    initDatabase();
 }
 
 // Quit when all windows are closed.

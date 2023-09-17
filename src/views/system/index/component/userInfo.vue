@@ -183,6 +183,7 @@ export default {
     this.updateInsertOpen = false
   },
   created() {
+    console.log("userInfo loading");
     this.getList();
   },
   methods: {

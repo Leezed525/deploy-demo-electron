@@ -47,25 +47,12 @@ export default {
       }
     }
   },
-  watch: {
-    "$route.getters.isLogin": {
-      handler(val, oldVal) {
-        console.log("in login watch");
-        console.log(val);
-        console.log(oldVal);
-      },
-      immediate: true,
-    },
-  },
   created() {
     if (this.$store.getters.isLogin) {
       this.$modal.msgWarning("您已经登陆过了");
       this.$router.push({path: "/index"});
     }
-    console.log("in login");
-    console.log(this.$route)
   },
-
   methods: {
     login() {
       let data = this.loginForm;

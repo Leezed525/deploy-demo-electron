@@ -57,7 +57,7 @@
 import predictSingle from "./component/predictSingle.vue";
 import predictMulti from "./component/predictMulti.vue";
 
-import userInfo from "./component/userInfo.vue";
+const userInfo = () => import("./component/userInfo.vue");//userInfo组件懒加载
 import {checkUser, changeUserPassword} from "@/db/system/userDB";
 import {isNotEmptyObject} from "@/utils/ObjectUtils";
 

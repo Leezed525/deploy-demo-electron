@@ -5,8 +5,6 @@
 </template>
 
 <script>
-import {helloWorldReq} from '@/api/demo/tmp'
-// import HelloWorld from './components/HelloWorld.vue'
 
 export default {
   name: 'app',
@@ -14,18 +12,8 @@ export default {
     // HelloWorld
   },
   created() {
-    // this.$router.push("/login")
   },
-  methods: {
-    sendHelloWorld() {
-      console.log(1);
-      helloWorldReq().then(res => {
-        console.log(res);
-      }).catch(err => {
-        console.log(err);
-      })
-    },
-  }
+  methods: {}
 }
 </script>
 

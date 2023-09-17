@@ -3,6 +3,7 @@
  * @Author: Leezed
  * @CreationDate 2023-09-11 12:41:59
  */
+import {isEmptyObject} from "@/utils/ObjectUtils";
 
 const sqlite3 = require('sqlite3')
 // const NODE_ENV = process.env.NODE_ENV
@@ -16,9 +17,6 @@ if (!fs.existsSync(path.join(homedir, '/config'))) {
     fs.mkdirSync(path.join(homedir, '/config'));
 }
 let DB_PATH = path.join(homedir, '/config/demo.db');
-// if (NODE_ENV !== 'development') {
-//     DB_PATH = path.join(path.dirname(app.getPath('exe')), '/config/demo.db');
-// }
 console.log('👉👉👉-----------------DB_PATH', DB_PATH)
 
 
@@ -26,7 +24,7 @@ console.log('👉👉👉-----------------DB_PATH', DB_PATH)
  * @Description: 连接数据库
  * @CreationDate 2023-05-10 13:48:41
  */
-function connectDatabase() {
+export function connectDatabase() {
     return new sqlite3.Database(DB_PATH, (err) => {
         if (err) {
             console.error('--------------------connectDatabaseErr' + err.message);
@@ -35,24 +33,40 @@ function connectDatabase() {
     });
 }
 
-const db = connectDatabase();
+export const db = connectDatabase();
 
-/**
- * @Description: 创建数据库,如果用户本地没有数据库的话就创建否则跳过
- * @CreationDate 2023-05-10 13:44:48
- */
-function createDataTable() {
-    /**
-     * @Description: 创建用户表
-     * @CreationDate 2023-06-01 22:53:23
-     */
-
-    db.serialize(function () {
-        db.run('create table if not exists user (id INTEGER PRIMARY KEY AUTOINCREMENT, username text, nickname text, password text,role INTEGER);');
+function checkUserTable() {
+    let sql = `SELECT name from sqlite_master where type='table' and name='user'`;
+    return new Promise((resolve, reject) => {
+        db.get(sql, (err, row) => {
+            if (err) {
+                reject(err);
+            }
+            resolve(row);
+        });
     });
-    // db.close();
 }
 
-exports.connectDatabase = connectDatabase;
-exports.createDataTable = createDataTable;
-exports.db = db;
+
+export function initDatabase() {
+    checkUserTable().then((row) => {
+        if (isEmptyObject(row)) {
+            console.log('👉👉👉-----------------user表不存在，创建user表')
+            createUserTable();
+        }
+    }).catch((err) => {
+        console.error(err);
+    });
+}
+
+
+function createUserTable() {
+    db.serialize(function () {
+        db.run('create table  user (id INTEGER PRIMARY KEY AUTOINCREMENT, username text, nickname text, password text,role INTEGER);');
+        db.run(`INSERT INTO user (username, nickname, password,role) VALUES ('root', '超级管理员', 'admin123',0);`)
+    });
+}
+
+// exports.connectDatabase = connectDatabase;
+// exports.initDatabase = initDatabase;
+// exports.db = db;
