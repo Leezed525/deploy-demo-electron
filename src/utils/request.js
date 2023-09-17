@@ -1,5 +1,7 @@
 import axios from 'axios';
-let baseURL = '/demo'
+
+console.log('现在的环境是' + process.env.ENV);
+let baseURL = process.env.VUE_APP_BASE_API;
 
 // 创建axios实例
 const service = axios.create({

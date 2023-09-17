@@ -1,6 +1,7 @@
 const {defineConfig} = require('@vue/cli-service')
 module.exports = defineConfig({
     transpileDependencies: true,
+    // publicPath: './',
     pluginOptions: {
         electronBuilder: {
             nodeIntegration: true //解决electron can't find module 'fs'问题

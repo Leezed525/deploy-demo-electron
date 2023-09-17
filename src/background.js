@@ -1,6 +1,6 @@
 'use strict'
-
 import {app, protocol, BrowserWindow} from 'electron'
+
 import {createProtocol} from 'vue-cli-plugin-electron-builder/lib'
 import installExtension, {VUEJS_DEVTOOLS} from 'electron-devtools-installer'
 
@@ -28,7 +28,7 @@ async function createWindow() {
             }
         }
     })
-
+    console.log(process.env.WEBPACK_DEV_SERVER_URL);
     if (process.env.WEBPACK_DEV_SERVER_URL) {
         // Load the url of the dev server if in development mode
         await win.loadURL(process.env.WEBPACK_DEV_SERVER_URL)

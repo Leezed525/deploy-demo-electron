@@ -48,7 +48,7 @@ function createDataTable() {
      */
 
     db.serialize(function () {
-        db.run('create table if not exists user (id INTEGER PRIMARY KEY AUTOINCREMENT, name text, email text, phone text);');
+        db.run('create table if not exists user (id INTEGER PRIMARY KEY AUTOINCREMENT, username text, nickname text, password text,role INTEGER);');
     });
     // db.close();
 }
