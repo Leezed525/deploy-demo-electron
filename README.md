@@ -5,20 +5,21 @@
 npm install
 ```
 
+建议使用yarn安装
+```
+npm install yarn -g
+yarn install
+```
+
 ### Compiles and hot-reloads for development
+### 开发模式运行
 ```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
+npm run electron:serve
 ```
 
-### Lints and fixes files
+### 打包
 ```
-npm run lint
+npm run electron:build
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+
