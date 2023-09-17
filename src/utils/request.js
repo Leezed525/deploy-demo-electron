@@ -2,6 +2,7 @@ import axios from 'axios';
 
 console.log('现在的环境是' + process.env.ENV);
 let baseURL = process.env.VUE_APP_BASE_API;
+console.log(baseURL);
 
 // 创建axios实例
 const service = axios.create({

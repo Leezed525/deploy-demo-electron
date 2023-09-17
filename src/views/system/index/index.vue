@@ -31,7 +31,7 @@
         <el-tab-pane label="角色管理">
           <userInfo></userInfo>
         </el-tab-pane>
-        <el-tab-pane label="定时任务补偿">定时任务补偿</el-tab-pane>
+<!--        <el-tab-pane label="定时任务补偿">定时任务补偿</el-tab-pane>-->
       </el-tabs>
     </el-card>
 
