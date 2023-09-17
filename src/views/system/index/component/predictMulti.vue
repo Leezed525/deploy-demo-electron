@@ -30,11 +30,7 @@
         <el-table-column prop="label" label="预测结果"/>
         <el-table-column label="图片">
           <template v-slot="scope">
-            <el-image fit="scale-down" :src="scope.row.imgUrl">
-              <!--              <div slot="error" class="image-slot">-->
-              <!--                <i class="el-icon-picture-outline">上传图片后预览</i>-->
-              <!--              </div>-->
-            </el-image>
+            <el-image fit="scale-down" :src="scope.row.imgUrl"/>
           </template>
         </el-table-column>
       </el-table>
@@ -55,7 +51,6 @@ export default {
       resultOpen: false,
       result: [],
       files: [],
-
     }
   },
   mounted() {
@@ -79,9 +74,7 @@ export default {
       //获取文件夹路径
       let path = fu.files[0].path;
       this.files = fu.files;
-      console.log(this.files);
       this.predictForm.fileUrl = path.substring(0, path.lastIndexOf("\\"));
-      console.log(this.predictForm.fileUrl);
     },
     //提交单张图片
     submitSingleMulti() {
@@ -93,8 +86,10 @@ export default {
         this.result.forEach(item => {
           let targetFile;
           for (let i = 0; i < this.files.length; i++) {
-            if (this.files[i].name === item.filename)
+            if (this.files[i].name === item.filename) {
               targetFile = this.files[i];
+              break;
+            }
           }
           item.imgUrl = window.URL.createObjectURL(targetFile);
         })
